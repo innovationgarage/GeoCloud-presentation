@@ -1,30 +1,110 @@
 #include <U8g2lib.h>
 #include <Wire.h>
+#include "elcheapo.h"
 
 U8G2_SH1106_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
 
 #define LCD_CLK 5
 #define LCD_SDA 4
-
+#define WW 128
+#define HH 64
 void setup(void) {
 
   // put your setup code here, to run once:
   // change hardware I2C pins to (5,4) (D1,D2)
   Wire.begin(LCD_CLK, LCD_SDA);
-
   u8g2.begin();
   u8g2.enableUTF8Print();
 }
 
-void draw() {
-  u8g2.clearBuffer();         // clear the internal memory
-  u8g2.setCursor(10, 10);
-  u8g2.print("Hello");
-  u8g2.sendBuffer();        // transfer internal memory to the display
-}
 
 void loop(void) {
+  delay(100);
 
+  for (int i = 48; i < 59; i++)
+  {
+    u8g2.clearBuffer();        // transfer internal memory to the display
+
+    /*u8g2.setFont(u8g2_font_ncenB08_tr); // choose a suitable font
+      u8g2.setCursor(0, 20);
+      u8g2.print(i);*/
+    u8g2.setFont(progress); // choose a suitable font
+    u8g2.setCursor(0, 64);
+    u8g2.print((char)i); // write something to the internal memory*/
+
+    u8g2.sendBuffer();        // transfer internal memory to the display
+    delay(20);
+  }
+  for (int i = 59; i < 65; i++)
+  {
+    u8g2.clearBuffer();        // transfer internal memory to the display
+    u8g2.setFont(progress); // choose a suitable font
+    u8g2.setCursor(0, 64);
+    u8g2.print((char)i); // write something to the internal memory*/
+
+    u8g2.sendBuffer();        // transfer internal memory to the display
+    delay(100);
+  }
+  delay(1000);
+
+  for (int i = 65; i < 83; i++)
+  {
+    u8g2.clearBuffer();        // transfer internal memory to the display
+    u8g2.setFont(progress); // choose a suitable font
+    u8g2.setCursor(0, 64);
+    u8g2.print((char)i); // write something to the internal memory*/
+
+    u8g2.sendBuffer();        // transfer internal memory to the display
+    delay(20);
+  }
+
+  delay(1000);
+
+  for (int i = 83; i < 90; i++)
+  {
+    u8g2.clearBuffer();        // transfer internal memory to the display
+    u8g2.setFont(progress); // choose a suitable font
+    u8g2.setCursor(0, 64);
+    u8g2.print((char)i); // write something to the internal memory*/
+
+    u8g2.setFont(u8g2_font_t0_12_mf ); // choose a suitable font
+    const int h = 12, s = 4, x = 3;
+    switch (i)
+    {
+      case 88:      case 89:
+        u8g2.setFont(u8g2_font_t0_11b_mf ); // choose a suitable font
+
+        u8g2.setCursor(x, 64 - s);
+        u8g2.print("Initialising UI...");
+      case 87:
+        u8g2.setFont(u8g2_font_t0_12_mf ); // choose a suitable font
+
+        u8g2.setCursor(x, 64 - s - h);
+        u8g2.print("Network interface OK");
+      case 85: case 86:
+        u8g2.setCursor(x, 64 - s - h * 2);
+        u8g2.print("Serial port       OK");
+      case 84:
+        u8g2.setCursor(x, 64 - s - h * 3);
+        u8g2.print("System boot       OK");
+    }
+
+    u8g2.sendBuffer();        // transfer internal memory to the display
+    delay(random(300, 1000));
+  }
+  delay(1000);
+  for (int i = 90; i < 100; i++)
+  {
+    u8g2.clearBuffer();        // transfer internal memory to the display
+    u8g2.setFont(progress); // choose a suitable font
+    u8g2.setCursor(0, 64);
+    u8g2.print((char)i); // write something to the internal memory*/
+
+    u8g2.sendBuffer();        // transfer internal memory to the display
+    delay(20);
+  }
+
+  delay(1000);
 }
 
 /*void drawWeatherSymbol(u8g2_uint_t x, u8g2_uint_t y, uint8_t symbol)
